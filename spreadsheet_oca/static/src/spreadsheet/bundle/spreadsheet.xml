@@ -144,7 +144,7 @@
                 />
                 <i
                     class="fa fa-cog btn btn-link text-muted spreadsheet_oca_filter_value_edit"
-                    t-on-click="() =&gt; this.onEditFilter(filter)"
+                    t-on-click="() => this.onEditFilter(filter)"
                 />
             </div>
         </div>
@@ -440,7 +440,7 @@
             <t t-call="web.Breadcrumb.Actions" />
         </div>
 
-        <t t-slot="control-panel-status-indicator" />
+        <t t-call-slot="control-panel-status-indicator" />
     </t>
     <t t-name="spreadsheet_oca.PivotIcon" owl="1">
         <i class="fa fa-table" />
@@ -468,7 +468,7 @@
                         <div
                             class="btn-group d-xl-none o_control_panel_collapsed_create"
                         >
-                            <t t-slot="control-panel-create-button" />
+                            <t t-call-slot="control-panel-create-button" />
                             <button
                                 class="btn btn-primary dropdown-toggle dropdown-toggle-split o_control_panel_collapsed_create"
                                 t-att-class="{invisible: display.disableDropdown}"
@@ -479,24 +479,24 @@
                                 <span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu o_control_panel_collapsed_create">
-                                <t t-slot="layout-buttons" />
-                                <t t-slot="control-panel-always-buttons" />
+                                <t t-call-slot="layout-buttons" />
+                                <t t-call-slot="control-panel-always-buttons" />
                             </ul>
                         </div>
                         <div class="d-none d-xl-inline-flex gap-1">
-                            <t t-slot="control-panel-create-button" />
-                            <t t-slot="layout-buttons" />
-                            <t t-slot="control-panel-always-buttons" />
+                            <t t-call-slot="control-panel-create-button" />
+                            <t t-call-slot="layout-buttons" />
+                            <t t-call-slot="control-panel-always-buttons" />
                         </div>
                     </div>
                     <t t-if="env.config.noBreadcrumbs">
                         <section class="o_control_panel_breadcrumbs_actions d-contents">
-                            <t t-slot="control-panel-additional-actions" />
-                            <t t-slot="control-panel-status-indicator" />
+                            <t t-call-slot="control-panel-additional-actions" />
+                            <t t-call-slot="control-panel-status-indicator" />
                         </section>
                     </t>
                     <t t-else="">
-                        <t t-slot="control-panel-breadcrumb">
+                        <t t-call-slot="control-panel-breadcrumb">
                             <t t-call="spreadsheet_oca.Breadcrumbs" />
                         </t>
                     </t>
@@ -507,8 +507,8 @@
                 <div
                     class="o_control_panel_actions d-empty-none d-flex align-items-center justify-content-start justify-content-lg-around order-2 order-lg-1 w-100 w-lg-auto"
                 >
-                    <t t-if="display.layoutActions" t-slot="layout-actions" />
-                    <t t-slot="control-panel-selection-actions" />
+                    <t t-if="display.layoutActions" t-call-slot="layout-actions" />
+                    <t t-call-slot="control-panel-selection-actions" />
                 </div>
 
                 <div
@@ -567,7 +567,7 @@
                             </t>
                         </nav>
                     </t>
-                    <t t-slot="control-panel-navigation-additional" />
+                    <t t-call-slot="control-panel-navigation-additional" />
                 </div>
             </div>
         </div>

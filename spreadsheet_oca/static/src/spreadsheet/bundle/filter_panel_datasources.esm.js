@@ -1,5 +1,5 @@
 import * as spreadsheet from "@odoo/o-spreadsheet";
-import {Component, onWillStart, onWillUpdateProps, useRef, useState} from "@odoo/owl";
+import { Component, onWillStart, onWillUpdateProps, proxy } from "@odoo/owl";
 import {Domain} from "@web/core/domain";
 import {DomainSelector} from "@web/core/domain_selector/domain_selector";
 import {DomainSelectorDialog} from "@web/core/domain_selector_dialog/domain_selector_dialog";
@@ -7,6 +7,7 @@ import {ODOO_AGGREGATORS} from "@spreadsheet/pivot/pivot_helpers";
 import {_t} from "@web/core/l10n/translation";
 import {formatDate} from "@web/core/l10n/dates";
 import {useService} from "@web/core/utils/hooks";
+import { useRef } from "@web/owl2/utils";
 
 const {DateTime} = luxon;
 const {PivotTitleSection, PivotLayoutConfigurator} = spreadsheet.components;
@@ -172,7 +173,7 @@ pivotSidePanelRegistry.add("ODOO", {
 
 export class ListPanelDisplay extends Component {
   setup() {
-    this.state = useState({listRows: undefined});
+    this.state = proxy({listRows: undefined});
     this.dialog = useService("dialog");
     onWillStart(this.modelData.bind(this));
     onWillUpdateProps(this.modelData.bind(this));

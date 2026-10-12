@@ -1,12 +1,12 @@
-import {Component} from "@odoo/owl";
+import { Component, proxy, usePlugin } from "@odoo/owl";
 import {ControlPanel} from "@web/search/control_panel/control_panel";
-import {useService} from "@web/core/utils/hooks";
+import { ActionManagerPlugin } from "@web/webclient/actions/action_plugin";
 
-const {useState} = owl;
+const {proxy} = owl;
 
 export class SpreadsheetName extends Component {
   setup() {
-    this.state = useState({
+    this.state = proxy({
       name: this.props.name,
     });
   }
@@ -33,7 +33,7 @@ SpreadsheetName.props = {
 export class SpreadsheetControlPanel extends ControlPanel {
   setup() {
     super.setup();
-    this.actionService = useService("action");
+    this.actionService = usePlugin(ActionManagerPlugin);
   }
 
   onBreadcrumbClicked(jsId) {

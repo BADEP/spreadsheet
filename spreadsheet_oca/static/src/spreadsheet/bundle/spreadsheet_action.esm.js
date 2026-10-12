@@ -1,11 +1,14 @@
 import * as spreadsheet from "@odoo/o-spreadsheet";
 
+import { usePlugin } from "@odoo/owl";
 import {Domain} from "@web/core/domain";
 import {SpreadsheetControlPanel} from "./spreadsheet_controlpanel.esm";
 import {SpreadsheetRenderer} from "./spreadsheet_renderer.esm";
+import { NotificationPlugin } from "@web/core/notifications/notification_plugin";
 import {deepCopy} from "@web/core/utils/objects";
 import {helpers} from "@odoo/o-spreadsheet";
 import {registry} from "@web/core/registry";
+import { useSubEnv } from "@web/owl2/utils";
 import {standardActionServiceProps} from "@web/webclient/actions/action_service";
 import {useService} from "@web/core/utils/hooks";
 
@@ -28,7 +31,7 @@ function normalizeGroupBys(dimensions, fields) {
 export class ActionSpreadsheetOca extends Component {
   setup() {
     this.orm = useService("orm");
-    this.notification = useService("notification");
+    this.notification = usePlugin(NotificationPlugin);
     const params = this.props.action.params || this.props.action.context.params;
     this.spreadsheetId = params.spreadsheet_id || params.active_id;
     this.model = params.model || "spreadsheet.spreadsheet";

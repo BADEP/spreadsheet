@@ -1,15 +1,19 @@
 import * as spreadsheet from "@odoo/o-spreadsheet";
 
-import {Component} from "@odoo/owl";
+import { Component, usePlugin } from "@odoo/owl";
 import {ImageFileStore} from "./image_file_store.esm";
 import {OdooDataProvider} from "@spreadsheet/data_sources/odoo_data_provider";
 import {SpreadsheetComponent} from "@spreadsheet/actions/spreadsheet_component";
 import {_t} from "@web/core/l10n/translation";
 import {loadBundle} from "@web/core/assets";
+import { NotificationPlugin } from "@web/core/notifications/notification_plugin";
+import { UIPlugin } from "@web/core/ui/ui_plugin";
 import {useService} from "@web/core/utils/hooks";
+import { useSubEnv } from "@web/owl2/utils";
 import {useSetupAction} from "@web/search/action_hook";
 import {user} from "@web/core/user";
 import {waitForDataLoaded} from "@spreadsheet/helpers/model";
+import { ActionManagerPlugin } from "@web/webclient/actions/action_plugin";
 
 const {Model, load} = spreadsheet;
 
@@ -121,10 +125,10 @@ export class SpreadsheetRenderer extends Component {
     this.orm = useService("orm");
     this.http = useService("http");
     this.bus_service = this.env.services.bus_service;
-    this.ui = useService("ui");
-    this.action = useService("action");
+    this.ui = usePlugin(UIPlugin);
+    this.action = usePlugin(ActionManagerPlugin);
     this.dialog = useService("dialog");
-    this.notifications = useService("notification");
+    this.notifications = usePlugin(NotificationPlugin);
     const odooDataProvider = new OdooDataProvider(this.env);
     this.loadCurrencies = this.getCurrencies();
     this.loadLocales = this.getLocales();

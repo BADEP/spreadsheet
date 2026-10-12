@@ -1,15 +1,17 @@
-import {useBus, useService} from "@web/core/utils/hooks";
+import { usePlugin } from "@odoo/owl";
+import { useBus } from "@web/core/utils/hooks";
 
 import {HandleField} from "@web/views/fields/handle/handle_field";
 import {ListRenderer} from "@web/views/list/list_renderer";
 import {omit} from "@web/core/utils/objects";
 import {patch} from "@web/core/utils/patch";
 import {user} from "@web/core/user";
+import { ActionManagerPlugin } from "@web/webclient/actions/action_plugin";
 
 patch(ListRenderer.prototype, {
   setup() {
     super.setup(...arguments);
-    this.actionService = useService("action");
+    this.actionService = usePlugin(ActionManagerPlugin);
     useBus(
       this.env.bus,
       "addListOnSpreadsheet",

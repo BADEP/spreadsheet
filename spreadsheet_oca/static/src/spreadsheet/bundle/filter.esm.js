@@ -1,5 +1,5 @@
 import * as spreadsheet from "@odoo/o-spreadsheet";
-import {Component, onWillStart, useState} from "@odoo/owl";
+import { Component, onWillStart, proxy } from "@odoo/owl";
 import {DefaultDateValue} from "@spreadsheet/global_filters/components/default_date_value/default_date_value";
 import {Domain} from "@web/core/domain";
 import {DomainSelector} from "@web/core/domain_selector/domain_selector";
@@ -72,7 +72,7 @@ export class EditFilterPanel extends Component {
     this.orm = useService("orm");
     this.nameService = useService("name");
     this.dialog = useService("dialog");
-    this.state = useState({
+    this.state = proxy({
       label: this.props.filter.label,
       type: this.props.filter.type,
       defaultValue: this._unwrapDefaultValue(

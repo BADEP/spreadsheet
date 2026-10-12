@@ -1,4 +1,4 @@
-import {Component} from "@odoo/owl";
+import { Component, usePlugin } from "@odoo/owl";
 import {FileUploader} from "@web/views/fields/file_handler";
 import {ListController} from "@web/views/list/list_controller";
 import {_t} from "@web/core/l10n/translation";
@@ -6,12 +6,13 @@ import {listView} from "@web/views/list/list_view";
 import {registry} from "@web/core/registry";
 import {standardWidgetProps} from "@web/views/widgets/standard_widget_props";
 import {useService} from "@web/core/utils/hooks";
+import { ActionManagerPlugin } from "@web/webclient/actions/action_plugin";
 
 class SpreadsheetFileUploader extends Component {
   setup() {
     this.orm = useService("orm");
     this.attachmentIdsToProcess = [];
-    this.action = useService("action");
+    this.action = usePlugin(ActionManagerPlugin);
   }
   async onFileUploaded(file) {
     const att_data = {

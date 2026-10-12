@@ -16,9 +16,9 @@
                         t-if="props.togglerTemplate"
                         t-call="{{ props.togglerTemplate }}"
                     />
-                    <t t-else="" t-slot="toggler" />
+                    <t t-else="" t-call-slot="toggler" />
                 </t>
-                <t t-slot="extra" />
+                <t t-call-slot="extra" />
             </FileUploader>
         </div>
     </t>
